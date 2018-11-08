@@ -15,7 +15,7 @@
 
 .app-title {
   margin-bottom: 150px;
-  font-size: 76px;
+  font-size: 72px;
   font-style: italic;
 }
 
@@ -69,21 +69,23 @@
   align-items: center;
   justify-content: center;
   color: black;
-  margin-top: 50px;
-  margin-bottom: 100px;
+  max-width: 80%;
+  margin: 50px auto 100px;
+  flex-wrap: wrap;
 
   .city-weather {
     min-width: 180px;
     background-color: white;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 10px;
     border: 2px solid darkcyan;
     border-radius: 10px;
     position: relative;
 
     .city-weather__name {
+      font-size: 24px;
       font-weight: bold;
       margin-bottom: 10px;
+      margin-top: 30px;
     }
 
     .city-weather__temperature {

@@ -116,15 +116,13 @@ class App extends Component {
             <button className="input-block__add" onClick={this.addWeather}>Add</button>
             <button className="input-block__clear" onClick={this.clearWeather}>Clear</button>
           </div>
-          <div>
-            {
-              this.state.dashboard.length > 0 ? (
-                this.createDashboard()
-              ) : (
-                <h3>Dashboard is empty</h3>
-              )
-            }
-          </div>
+          {
+            this.state.dashboard.length > 0 ? (
+              this.createDashboard()
+            ) : (
+              <h3>Dashboard is empty</h3>
+            )
+          }
           { this.state.loading && <Loading/> }
         </header>
       </div>
