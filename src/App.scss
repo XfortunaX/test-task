@@ -1,0 +1,115 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.app-title {
+  margin-bottom: 150px;
+  font-size: 76px;
+  font-style: italic;
+}
+
+.error {
+  color: red;
+  font-size: 24px;
+}
+
+.input-block {
+  margin-bottom: 40px;
+  width: 100%;
+
+  .input-block__input {
+    font-size: 24px;
+    border-radius: 10px;
+    border-color: darkcyan;
+    height: 40px;
+    display: block;
+    margin: auto auto 40px;
+    padding-left: 20px;
+    max-width: 80%;
+  }
+
+  .input-block__add {
+    background-color: lightseagreen;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 10px;
+    border-color: darkcyan;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 50px;
+    width: 120px;
+  }
+
+  .input-block__clear {
+    background-color: crimson;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 10px;
+    border-color: darkcyan;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 50px;
+    width: 120px;
+  }
+}
+
+.dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  margin-top: 50px;
+  margin-bottom: 100px;
+
+  .city-weather {
+    min-width: 180px;
+    background-color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 2px solid darkcyan;
+    border-radius: 10px;
+    position: relative;
+
+    .city-weather__name {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .city-weather__temperature {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-style: italic;
+      font-size: 24px;
+    }
+
+    .city-weather__delete {
+      background-color: white;
+      height: 40px;
+      width: 110px;
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 20px;
+      border: 2px solid red;
+      color: red;
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      display: none;
+    }
+
+    &:hover .city-weather__delete {
+      display: block;
+    }
+  }
+}
