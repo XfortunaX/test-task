@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
 import './App.scss';
 import Loading from './components/Loading'
+import WeatherCard from './components/WeatherCard'
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       dashboard: [],
-      appid: '87f95bb5b741fe89ebd10a7fb4d66f0c',
-      city: 'London',
-      units: 'metric',
+      city: '',
       error: '',
       loading: false
     };
-
-    this.changeInput = this.changeInput.bind(this);
-    this.addWeather = this.addWeather.bind(this);
-    this.clearWeather = this.clearWeather.bind(this);
   }
   componentDidMount () {
     if (localStorage.getItem('dashboard')) {
@@ -25,7 +20,7 @@ class App extends Component {
       })
     }
   }
-  async addWeather() {
+  addWeather = async () => {
     if (/[A-Za-z0-9]+/.test(this.state.city)) {
       this.setState({
         loading: true
@@ -59,16 +54,17 @@ class App extends Component {
   async getWeather () {
     let myInit = { method: 'GET' };
 
-    let resp = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&APPID=${this.state.appid}&units=${this.state.units}`, myInit)
+    let resp = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&APPID=87f95bb5b741fe89ebd10a7fb4d66f0c&units=metric`, myInit)
 
     return await resp.json()
   }
-  clearWeather () {
+  clearWeather = () => {
     this.setState({
       dashboard: []
     })
+    localStorage.setItem('dashboard', JSON.stringify(this.state.dashboard))
   }
-  changeInput (e) {
+  changeInput = (e) => {
     e.preventDefault()
 
     this.setState({
@@ -76,29 +72,13 @@ class App extends Component {
       error: ''
     })
   }
-  deleteDash (e, i) {
+  deleteDash = (e, i) => {
     let arr = this.state.dashboard
     arr.splice(i, 1)
 
     this.setState({
       dashboard: arr
     })
-  }
-  createDashboard() {
-    localStorage.setItem('dashboard', JSON.stringify(this.state.dashboard))
-
-    const listItems = this.state.dashboard.map((item, i) =>
-      <div className="city-weather" key={i} onMouseEnter={this.showDelete} onMouseLeave={this.hideDelete}>
-        <button className="city-weather__delete" onClick={ (e) => this.deleteDash(e, i)}>delete</button>
-        <p className="city-weather__name">{item.name}</p>
-        <p className="city-weather__temperature">{item.temperature > 0 ? '+' : ''}{item.temperature} <sup>o</sup>C</p>
-        <img className="city-weather__icon" src={`http://openweathermap.org/img/w/${item.icon}.png`} alt=""/>
-      </div>
-    );
-
-    return (
-      <div className="dashboard">{listItems}</div>
-    );
   }
   render() {
     return (
@@ -117,7 +97,7 @@ class App extends Component {
         </div>
         {
           this.state.dashboard.length > 0 ? (
-            this.createDashboard()
+            <WeatherCard dashboard={this.state.dashboard} action={this.deleteDash}/>
           ) : (
             <h3>Dashboard is empty</h3>
           )
