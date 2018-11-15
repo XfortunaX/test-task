@@ -20,8 +20,17 @@ class App extends Component {
       })
     }
   }
+  componentDidUpdate (prevProps, prevState) {
+    if (this.state.dashboard.length !== prevState.dashboard.length) {
+      localStorage.setItem('dashboard', JSON.stringify(this.state.dashboard))
+    }
+  }
   addWeather = async () => {
-    if (/[A-Za-z0-9]+/.test(this.state.city)) {
+    let add = this.state.dashboard.find((item) => {
+      return item.name === this.state.city
+    })
+
+    if (!add) {
       this.setState({
         loading: true
       })
@@ -47,7 +56,7 @@ class App extends Component {
       })
     } else {
       this.setState({
-        error: 'В названии города могут использоваться только латинские буквы и цифры'
+        error: 'Такой город уже добавлен'
       })
     }
   }
@@ -56,25 +65,32 @@ class App extends Component {
 
     let resp = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&APPID=87f95bb5b741fe89ebd10a7fb4d66f0c&units=metric`, myInit)
 
-    return await resp.json()
+    return resp.json()
   }
   clearWeather = () => {
     this.setState({
       dashboard: []
     })
-    localStorage.setItem('dashboard', JSON.stringify(this.state.dashboard))
   }
   changeInput = (e) => {
     e.preventDefault()
 
-    this.setState({
-      city: e.target.value,
-      error: ''
-    })
+    if (/[A-Za-z]+[0-9]*/.test(e.target.value) || e.target.value === '') {
+      this.setState({
+        city: e.target.value,
+        error: ''
+      })
+    } else {
+      this.setState({
+        city: e.target.value,
+        error: 'В названии города могут использоваться только латинские буквы и цифры'
+      })
+    }
   }
   deleteDash = (e, i) => {
     let arr = this.state.dashboard
     arr.splice(i, 1)
+    localStorage.setItem('dashboard', JSON.stringify(arr))
 
     this.setState({
       dashboard: arr
@@ -92,7 +108,7 @@ class App extends Component {
             onChange={this.changeInput}
             placeholder="Введите название города"
           />
-          <button className="input-block__add" onClick={this.addWeather}>Add</button>
+          { this.state.error === '' && <button className="input-block__add" onClick={this.addWeather}>Add</button> }
           <button className="input-block__clear" onClick={this.clearWeather}>Clear</button>
         </div>
         {
