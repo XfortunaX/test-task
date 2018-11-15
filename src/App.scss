@@ -1,8 +1,5 @@
-.App {
+.app {
   text-align: center;
-}
-
-.App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -17,6 +14,10 @@
   margin-bottom: 150px;
   font-size: 72px;
   font-style: italic;
+}
+
+button {
+  cursor: pointer;
 }
 
 .error {
@@ -37,6 +38,10 @@
     margin: auto auto 40px;
     padding-left: 20px;
     max-width: 80%;
+
+    &::placeholder {
+      font-size: 16px;
+    }
   }
 
   .input-block__add {
@@ -49,6 +54,11 @@
     margin-right: 10px;
     height: 50px;
     width: 120px;
+    transition: background-color 0.5s;
+
+    &:hover {
+      background-color: white;
+    }
   }
 
   .input-block__clear {
@@ -61,6 +71,11 @@
     margin-right: 10px;
     height: 50px;
     width: 120px;
+    transition: background-color 0.5s;
+
+    &:hover {
+      background-color: white;
+    }
   }
 }
 

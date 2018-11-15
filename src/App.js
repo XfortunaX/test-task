@@ -102,29 +102,27 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="app-title">Weather dashboard</h1>
-          { this.state.error.length > 0 && <p className="error">{this.state.error}</p> }
-          <div className="input-block">
-            <input
-              type="text"
-              className="input-block__input"
-              onChange={this.changeInput}
-              placeholder="Введите название города"
-            />
-            <button className="input-block__add" onClick={this.addWeather}>Add</button>
-            <button className="input-block__clear" onClick={this.clearWeather}>Clear</button>
-          </div>
-          {
-            this.state.dashboard.length > 0 ? (
-              this.createDashboard()
-            ) : (
-              <h3>Dashboard is empty</h3>
-            )
-          }
-          { this.state.loading && <Loading/> }
-        </header>
+      <div className="app">
+        <h1 className="app-title">Weather dashboard</h1>
+        { this.state.error.length > 0 && <p className="error">{this.state.error}</p> }
+        <div className="input-block">
+          <input
+            type="text"
+            className="input-block__input"
+            onChange={this.changeInput}
+            placeholder="Введите название города"
+          />
+          <button className="input-block__add" onClick={this.addWeather}>Add</button>
+          <button className="input-block__clear" onClick={this.clearWeather}>Clear</button>
+        </div>
+        {
+          this.state.dashboard.length > 0 ? (
+            this.createDashboard()
+          ) : (
+            <h3>Dashboard is empty</h3>
+          )
+        }
+        { this.state.loading && <Loading/> }
       </div>
     );
   }
